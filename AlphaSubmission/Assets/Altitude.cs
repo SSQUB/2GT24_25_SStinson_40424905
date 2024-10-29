@@ -21,14 +21,12 @@ public class Altitude : MonoBehaviour
         // Check if the text component is assigned
         if (altitudeText != null)
         {
-            // Get the Y position of the Rocket object (a cube for now!)
+            // Get the Y position of the object
             float yPos = transform.position.y;
 
             // Display the Y position in the UI
-            //The below needs to be refactored as it only writes out the text "Y Position" but not the actual value (using Y position as altitude)
-            // The value is readable and correct as it's able to be sent to the console, but needs more research to resolve sending to the UI
-            altitudeText.text = "Y Position: " + yPos("F2"); // F2 limits to 2 decimal places
-            Debug.Log("Y Position: " + yPos); 
+            altitudeText.text = "Y Position: " + yPos; // F2 limits to 2 decimal places
+            Debug.Log("Y Position: " + yPos);
         }
 
     }
