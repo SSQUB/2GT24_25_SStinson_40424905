@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 { 
 
-    //Private Variables
-    private float speed = 45.0f;
+//Private Variables
+private float speed = 45.0f;
 private float turnSpeed = 5.0f;
 private float horizontalInput;
 private float forwardInput;
 
-    public Text velocityText;
-    private int mph=200;
+public Text velocityText; //UI element used to display velocity of Rocket
+private int mph=200; // Variable to hold Velocity MPH (Speed)
 
 
-    public float driftForce = 1.0f;  // Controls the amount of sideways drift
+public float driftForce = 1.0f;  // Controls the amount of sideways drift
 
 private Rigidbody rb;
 
@@ -36,25 +36,19 @@ void Update()
 
 
     //This is where we get player input
-    horizontalInput = Input.GetAxis("Horizontal");
-    // forwardInput = Input.GetAxis("Vertical");
-    float inputY = Input.GetAxis("Vertical"); //added to test moving vertically upwards
+    horizontalInput = Input.GetAxis("Horizontal"); // Take horixontal input from player
+    float inputY = Input.GetAxis("Vertical"); // Take vertical input from player
 
-    //speed = 45.0f;
+    Vector3 movement = new Vector3(0, inputY * speed * Time.deltaTime, 0);  //Calculate vertically input to the Rocket
+    transform.position += movement;  //Apply vertical movement to the rocket
 
-    Vector3 movement = new Vector3(0, inputY * speed * Time.deltaTime, 0);  //added to test moving vertically upwards
-                                                                            // Apply the movement
-    transform.position += movement;  //added to test moving vertically upwards
-
-    // We will move the vehicle forward
-    //  transform.Translate(Vector3.forward*Time.deltaTime*speed*forwardInput);
-    //We turn the vehicle
+    // Apply horizontal input to the Rocket 
     transform.Translate(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
     transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
 
-        // Apply a constant force to the right (or left) to make the object drift
-        Vector3 drift = Vector3.right * driftForce;
-        rb.AddForce(drift*Time.deltaTime, ForceMode.Acceleration);
+    // Apply a constant force to the right to make the Rocket drift to the right
+    Vector3 drift = Vector3.right * driftForce;
+    rb.AddForce(drift*Time.deltaTime, ForceMode.Acceleration);
 
 
     }
@@ -62,11 +56,13 @@ void Update()
     void FixedUpdate()
 {
 
-        mph = mph+1;
+        // The below code exists to test writing updating data to the UI,
+        // a feature that exceeds the Alpha Submission features in the Game Design Document
 
-        //var mph = rigidbody.velocity.magnitude * 2.237;
+        mph = mph+1; //Increment Velocity MPH currently displayed in UI
+
+        // Write out the updated Velocity MPH to the UI
         velocityText.text = "Velocity: " +mph.ToString();
-       // velocityText.text = "Game Over ";
 
     }
 
