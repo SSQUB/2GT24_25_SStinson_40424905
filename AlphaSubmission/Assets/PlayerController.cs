@@ -13,7 +13,7 @@ private float horizontalInput;
 private float forwardInput;
 
 public Text velocityText; //UI element used to display velocity of Rocket
-private int mph=200; // Variable to hold Velocity MPH (Speed)
+private int mph=200; // Variable to hold Velocity MPH (Speed), initial speed set to 200MPH
 
 
 public float driftForce = 1.0f;  // Controls the amount of sideways drift
